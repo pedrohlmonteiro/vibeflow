@@ -9,6 +9,7 @@ export default {
   navHow: 'How it works',
   navUseCases: 'Use cases',
   navCommands: 'Commands',
+  navAnatomy: 'Anatomy',
   navInstall: 'Editions',
   navStarGithub: 'Star on GitHub',
 
@@ -27,12 +28,12 @@ export default {
   heroQuickStart3Cmd: '$ implement',
   heroQuickStart3Desc: '✓ 3 files changed · tests pass · DoD self-verified',
   heroQuickStart4Cmd: '$ audit',
-  heroQuickStart4Desc: 'PASS — all checks verified, patterns followed',
+  heroQuickStart4Desc: 'PASS. All checks verified, patterns followed',
 
   // How it works — Pipeline
   pipelineLabel: 'Core pipeline',
   howTitle: 'Four core commands.<br>Idea to audited code.',
-  howSubtitle: 'The main pipeline — plus 5 more commands for every workflow.',
+  howSubtitle: 'The main pipeline, plus 5 more commands for every workflow.',
   step1Title: 'analyze',
   step2Title: 'gen-spec',
   step3Title: 'implement',
@@ -42,13 +43,13 @@ export default {
   pipelineStep3Desc: 'Builds from the spec. Follows your patterns, respects budget, runs tests, self-verifies.',
   pipelineStep4Desc: 'Checks every DoD item with evidence. Pattern compliance. Verdict: PASS, PARTIAL, or FAIL.',
   pipelineExtra: 'Plus 5 more:',
-  pipelineExtraList: 'discover · prompt-pack · quick · teach · stats —',
+  pipelineExtraList: 'discover · prompt-pack · quick · teach · stats',
 
   // Live Demo
   demoLabel: 'Live Demo',
   demoTitle: 'From vague idea to verified code.',
   demoSubtitle: 'Watch Vibeflow turn a feature request into audited, pattern-compliant implementation.',
-  demoChallengeLabel: 'discover phase — challenging scope:',
+  demoChallengeLabel: 'discover phase, challenging scope:',
   demoPushbackLabel: 'pushes back:',
   demoOutputScope: 'Scope:',
   demoOutputAntiScope: 'Anti-scope:',
@@ -133,7 +134,7 @@ export default {
   featuresSubtitle: 'Core pipeline plus power tools for every workflow.',
   featSeeAll: 'See all commands →',
   cmdDetails: 'Details →',
-  cmdFullRef: 'See full reference — flags, modes & outputs →',
+  cmdFullRef: 'See full reference: flags, modes & outputs →',
 
   // Core commands (tier 1)
   feat1Title: 'analyze',
@@ -311,7 +312,7 @@ export default {
   cmdTeachCat3: 'Architectural decision: adds to decisions.md with context and discarded alternatives.',
   cmdTeachCat4: 'New pattern: creates a new .vibeflow/patterns/<name>.md file with standard structure.',
   cmdTeachCat5: '--from <url|path>: imports patterns and conventions from an external reference repo (e.g., shared coding guidelines, architecture docs). Interactive review lets you pick what to import. Saves to .vibeflow/patterns/external-<name>/.',
-  cmdTeachConflict: 'Conflict detection: when importing or creating patterns, detects name collisions with existing local or imported patterns. Asks which version to keep — no silent overwrites.',
+  cmdTeachConflict: 'Conflict detection: when importing or creating patterns, detects name collisions with existing local or imported patterns. Asks which version to keep, with no silent overwrites.',
   cmdTeachOutput: 'Updates to .vibeflow/ docs (conventions.md, patterns/, decisions.md, patterns/external-*/)',
 
   // stats
@@ -320,6 +321,71 @@ export default {
   cmdStatsMetrics: 'Verdicts breakdown (PASS/PARTIAL/FAIL percentages), DoD pass rate, top 3 most failing checks, top 3 most violated patterns.',
   cmdStatsTrend: 'Quality trend: improving, stable, or degrading (requires ≥3 audits).',
   cmdStatsOutput: 'Chat output only (read-only, no files modified).',
+
+  // Anatomy — page intro
+  anatomyEyebrow: 'Inside the .vibeflow/ folder',
+  anatomyTitle: 'Anatomy of the<br>.vibeflow/ folder',
+  anatomySubtitle: 'What each file is, why it exists, and how the agent uses it. So you know what you can change, and what you should leave alone.',
+  anatomyIntro: 'When you run /analyze, Vibeflow creates a .vibeflow/ folder at the root of your project. It is the project knowledge base the agent reads before every spec, implementation, and audit. Four artifacts live there.',
+
+  // Anatomy — section labels (reused per artifact)
+  anatomyWhatLabel: 'What it is',
+  anatomyWhyLabel: 'Why it exists',
+  anatomyAgentLabel: 'How the agent uses it',
+  anatomyEditLabel: 'Do you edit it?',
+
+  // Anatomy — index.md
+  anatomyIndexName: 'index.md',
+  anatomyIndexTagline: 'The map.',
+  anatomyIndexWhat: 'A single file with the project overview: stack, structure, key files, dependencies, suggested budget, known tech debt, and the Pattern Registry (a YAML block listing every pattern with its tags and modules).',
+  anatomyIndexWhy: 'Every skill needs to orient itself before doing anything. Without a map, the agent re-discovers the project on every command, which is slow, inconsistent, and easy to drift. The Registry also lets skills load only the relevant patterns instead of all of them.',
+  anatomyIndexAgent: 'Read by every skill at the start: analyze writes it, discover / gen-spec / implement / audit read it to know the stack, find target files, and resolve patterns via the Registry.',
+  anatomyIndexEdit: 'Mostly auto-generated. You can hand-edit notes outside the <!-- vibeflow:patterns:start/end --> markers, and those survive incremental analyze runs. Inside the markers is regenerated.',
+
+  // Anatomy — patterns/
+  anatomyPatternsName: 'patterns/',
+  anatomyPatternsTagline: 'The recurring structural solutions.',
+  anatomyPatternsWhat: 'A folder with one markdown file per pattern. Each file documents a solution shape that repeats across the project: what it is, where it lives, the rules, and real code examples lifted from the codebase.',
+  anatomyPatternsWhy: 'Patterns carry nuance: the what, the why, and the how. They are how the agent writes code that looks like your code, not generic code. Without them, every implementation reinvents structure.',
+  anatomyPatternsAgent: 'gen-spec picks the relevant patterns via the Registry and lists them in the spec. implement reads only those and replicates their structure. audit verifies the implementation followed them. teach can add new ones, including imported from external repos via --from.',
+  anatomyPatternsEdit: 'Yes, but carefully. Content inside <!-- vibeflow:auto:start/end --> is auto-generated; edit outside the markers to add notes that survive re-analysis. Use /teach to add a new pattern instead of dropping a file by hand.',
+
+  // Anatomy — conventions.md
+  anatomyConventionsName: 'conventions.md',
+  anatomyConventionsTagline: 'The rules.',
+  anatomyConventionsWhat: 'A single file with the small, atomic rules of the project: naming, file layout, language/runtime, error handling, delimiters, documentation expectations. Short bullets, no narrative.',
+  anatomyConventionsWhy: 'Rules without nuance ("do it this way") belong in one flat list, not scattered across pattern docs. This file is what the agent applies on every line of code it writes, regardless of which pattern is in play.',
+  anatomyConventionsAgent: 'Loaded by gen-spec, implement, and audit on every run. Implement applies it line-by-line; audit treats violations as quality failures (the craftsmanship gate).',
+  anatomyConventionsEdit: 'Yes. Use /teach to add or correct a convention in natural language ("we always use named exports"). Direct edits outside <!-- vibeflow:auto:start/end --> are preserved.',
+
+  // Anatomy — decisions.md
+  anatomyDecisionsName: 'decisions.md',
+  anatomyDecisionsTagline: 'The architectural memory.',
+  anatomyDecisionsWhat: 'A reverse-chronological log of architectural decisions: context, options considered, what was chosen, and why. Newest first. Written by the architect during specs and audits, never auto-generated.',
+  anatomyDecisionsWhy: 'Six months later, no one remembers why you picked option B over option A. This file is the trail. It also prevents the agent from re-litigating settled questions on every new spec.',
+  anatomyDecisionsAgent: 'Read by gen-spec and audit when a decision is relevant to the current scope. The architect appends new entries when a non-trivial trade-off is resolved.',
+  anatomyDecisionsEdit: 'Yes. This one is the most "human". Add entries when you make an architectural call worth remembering. /teach can format it for you.',
+
+  // Anatomy — patterns vs conventions
+  anatomyVsTitle: 'Patterns vs conventions: what is the difference?',
+  anatomyVsIntro: 'They both teach the agent about your project, but at different levels. Conventions are atomic rules ("kebab-case filenames"). Patterns are recurring structural solutions ("how we build i18n components").',
+  anatomyVsConventionsTitle: 'conventions.md',
+  anatomyVsConventionsBullet1: 'Atomic rules, one-liners',
+  anatomyVsConventionsBullet2: 'Rarely explain the why',
+  anatomyVsConventionsBullet3: 'Applied on every line of code',
+  anatomyVsConventionsBullet4: 'Think: spelling rules',
+  anatomyVsPatternsTitle: 'patterns/*.md',
+  anatomyVsPatternsBullet1: 'Whole solutions, one file each',
+  anatomyVsPatternsBullet2: 'Always explain the why + examples',
+  anatomyVsPatternsBullet3: 'Applied when solving that specific problem',
+  anatomyVsPatternsBullet4: 'Think: essay structure',
+  anatomyVsClosing: 'Convention is how to spell the word. Pattern is how to build the paragraph.',
+
+  // Anatomy — CTA
+  anatomyCtaTitle: 'Want the full picture?',
+  anatomyCtaText: 'The MANUAL covers every command, flag, and workflow in depth.',
+  anatomyCtaBtn: 'Read the MANUAL',
+  anatomyCtaHref: 'https://github.com/pe-menezes/vibeflow/blob/main/MANUAL.md',
 
   // Footer
   footerLicense: 'MIT License',

@@ -1,0 +1,355 @@
+---
+import type { Locale } from '../i18n/utils';
+import { useTranslations } from '../i18n/utils';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const artifacts = [
+  {
+    name: t.anatomyIndexName,
+    tagline: t.anatomyIndexTagline,
+    what: t.anatomyIndexWhat,
+    why: t.anatomyIndexWhy,
+    agent: t.anatomyIndexAgent,
+    edit: t.anatomyIndexEdit,
+  },
+  {
+    name: t.anatomyPatternsName,
+    tagline: t.anatomyPatternsTagline,
+    what: t.anatomyPatternsWhat,
+    why: t.anatomyPatternsWhy,
+    agent: t.anatomyPatternsAgent,
+    edit: t.anatomyPatternsEdit,
+  },
+  {
+    name: t.anatomyConventionsName,
+    tagline: t.anatomyConventionsTagline,
+    what: t.anatomyConventionsWhat,
+    why: t.anatomyConventionsWhy,
+    agent: t.anatomyConventionsAgent,
+    edit: t.anatomyConventionsEdit,
+  },
+  {
+    name: t.anatomyDecisionsName,
+    tagline: t.anatomyDecisionsTagline,
+    what: t.anatomyDecisionsWhat,
+    why: t.anatomyDecisionsWhy,
+    agent: t.anatomyDecisionsAgent,
+    edit: t.anatomyDecisionsEdit,
+  },
+];
+
+const conventionsBullets = [
+  t.anatomyVsConventionsBullet1,
+  t.anatomyVsConventionsBullet2,
+  t.anatomyVsConventionsBullet3,
+  t.anatomyVsConventionsBullet4,
+];
+
+const patternsBullets = [
+  t.anatomyVsPatternsBullet1,
+  t.anatomyVsPatternsBullet2,
+  t.anatomyVsPatternsBullet3,
+  t.anatomyVsPatternsBullet4,
+];
+---
+
+<section class="anatomy-hero">
+  <div class="container">
+    <span class="anatomy-eyebrow">{t.anatomyEyebrow}</span>
+    <h1 class="anatomy-title"><Fragment set:html={t.anatomyTitle} /></h1>
+    <p class="anatomy-sub">{t.anatomySubtitle}</p>
+  </div>
+</section>
+
+<section class="anatomy-section">
+  <div class="container narrow">
+    <p class="anatomy-intro">{t.anatomyIntro}</p>
+
+    <div class="artifact-list">
+      {artifacts.map((a) => (
+        <article class="artifact-card">
+          <header class="artifact-head">
+            <code class="artifact-name">{a.name}</code>
+            <span class="artifact-tagline">{a.tagline}</span>
+          </header>
+
+          <dl class="artifact-axes">
+            <div class="axis">
+              <dt>{t.anatomyWhatLabel}</dt>
+              <dd>{a.what}</dd>
+            </div>
+            <div class="axis">
+              <dt>{t.anatomyWhyLabel}</dt>
+              <dd>{a.why}</dd>
+            </div>
+            <div class="axis">
+              <dt>{t.anatomyAgentLabel}</dt>
+              <dd>{a.agent}</dd>
+            </div>
+            <div class="axis">
+              <dt>{t.anatomyEditLabel}</dt>
+              <dd>{a.edit}</dd>
+            </div>
+          </dl>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="anatomy-section anatomy-vs">
+  <div class="container narrow">
+    <h2 class="vs-title">{t.anatomyVsTitle}</h2>
+    <p class="vs-intro">{t.anatomyVsIntro}</p>
+
+    <div class="vs-grid">
+      <div class="vs-card">
+        <h3><code>{t.anatomyVsConventionsTitle}</code></h3>
+        <ul>
+          {conventionsBullets.map((b) => <li>{b}</li>)}
+        </ul>
+      </div>
+      <div class="vs-card">
+        <h3><code>{t.anatomyVsPatternsTitle}</code></h3>
+        <ul>
+          {patternsBullets.map((b) => <li>{b}</li>)}
+        </ul>
+      </div>
+    </div>
+
+    <p class="vs-closing">{t.anatomyVsClosing}</p>
+  </div>
+</section>
+
+<section class="anatomy-cta">
+  <div class="container narrow">
+    <h2>{t.anatomyCtaTitle}</h2>
+    <p>{t.anatomyCtaText}</p>
+    <a href={t.anatomyCtaHref} target="_blank" rel="noopener" class="btn btn-light">{t.anatomyCtaBtn}</a>
+  </div>
+</section>
+
+<style>
+  .anatomy-hero {
+    padding: 6rem 0 3rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .anatomy-eyebrow {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 1rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+    background: var(--accent-glow);
+  }
+
+  .anatomy-title {
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.1;
+    margin: 0 auto 1.25rem;
+    max-width: 22ch;
+  }
+
+  .anatomy-sub {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    max-width: 50ch;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .anatomy-section {
+    padding: 4rem 0;
+  }
+
+  .container.narrow {
+    max-width: 820px;
+  }
+
+  .anatomy-intro {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 3rem;
+  }
+
+  .artifact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .artifact-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 2rem;
+    transition: border-color 0.3s var(--ease-out);
+  }
+  .artifact-card:hover {
+    border-color: var(--accent-glow-strong);
+  }
+
+  .artifact-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px dashed var(--border);
+  }
+
+  .artifact-name {
+    font-family: var(--font-mono);
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--accent-glow);
+    padding: 0.25rem 0.6rem;
+    border-radius: 6px;
+  }
+
+  .artifact-tagline {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    font-style: italic;
+  }
+
+  .artifact-axes {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.1rem;
+    margin: 0;
+  }
+
+  .axis dt {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-bottom: 0.3rem;
+  }
+
+  .axis dd {
+    margin: 0;
+    font-size: 0.92rem;
+    color: var(--text-primary);
+    line-height: 1.65;
+  }
+
+  .anatomy-vs {
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .vs-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 1rem;
+  }
+
+  .vs-intro {
+    font-size: 0.98rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0 0 2.5rem;
+  }
+
+  .vs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .vs-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+
+  .vs-card h3 {
+    font-size: 1rem;
+    margin: 0 0 1rem;
+    color: var(--text-primary);
+  }
+
+  .vs-card h3 code {
+    font-family: var(--font-mono);
+    color: var(--accent);
+    background: var(--accent-glow);
+    padding: 0.2rem 0.5rem;
+    border-radius: 5px;
+    font-size: 0.95rem;
+  }
+
+  .vs-card ul {
+    margin: 0;
+    padding-left: 1.1rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  .vs-closing {
+    text-align: center;
+    font-size: 1.05rem;
+    color: var(--text-primary);
+    font-weight: 500;
+    margin: 0;
+    padding: 1.25rem;
+    border-left: 3px solid var(--accent);
+    background: var(--bg-card);
+    border-radius: 0 8px 8px 0;
+  }
+
+  .anatomy-cta {
+    padding: 4rem 0 6rem;
+    text-align: center;
+  }
+
+  .anatomy-cta h2 {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin: 0 0 0.75rem;
+  }
+
+  .anatomy-cta p {
+    color: var(--text-secondary);
+    margin: 0 0 1.5rem;
+  }
+
+  @media (max-width: 768px) {
+    .anatomy-hero {
+      padding: 4rem 0 2rem;
+    }
+    .anatomy-section {
+      padding: 3rem 0;
+    }
+    .artifact-card {
+      padding: 1.5rem;
+    }
+    .vs-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
