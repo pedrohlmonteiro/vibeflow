@@ -1,7 +1,8 @@
 # Proposal: Critical Gate (destructive-op safety scan)
 
-> Status: **Planned** — not yet implemented. This document is the design spec to
-> pick up later.
+> Status: **Implemented (v1)** in vibeflow v1.12.0 — prompt-embedded catalog in
+> `audit`, across all three editions. The v2 Node engine (see "Engine" below)
+> remains future work.
 > Origin: adapted from the `chama` plugin's Critical Gate. Sized down to fit
 > vibeflow's identity (local-first, editor-agnostic, no GitHub coupling).
 
